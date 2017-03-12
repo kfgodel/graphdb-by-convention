@@ -44,7 +44,7 @@ public class ProbarBase {
     SetProperty.create(firstNode, "message", "Hello, ").doWith(graphDbTransaction);
 
     GraphNode secondNode = CreateNode.create().doWith(graphDbTransaction);
-    SetProperty.create(firstNode, "message", "World!").doWith(graphDbTransaction);
+    SetProperty.create(secondNode, "message", "World!").doWith(graphDbTransaction);
 
     GraphRelationship relationship = CreateRelationship.create(firstNode, "KNOWS", secondNode).doWith(graphDbTransaction);
     SetProperty.create(relationship, "message", "brave Neo4j ").doWith(graphDbTransaction);
