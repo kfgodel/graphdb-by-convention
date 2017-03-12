@@ -39,4 +39,11 @@ public interface GraphDbTransaction {
    * @param node The node to delete
    */
   void removeNode(GraphNode node);
+
+  /**
+   * Removes the given relationship from the database
+   *
+   * @param relationship The relationship to delete
+   */
+  void removeRelationship(GraphRelationship relationship);
 }

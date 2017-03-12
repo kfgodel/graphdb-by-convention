@@ -6,11 +6,11 @@ import ar.com.kfgodel.graphdb.api.concepts.GraphNode;
 import ar.com.kfgodel.graphdb.api.concepts.GraphRelationship;
 import ar.com.kfgodel.graphdb.api.operations.CreateNode;
 import ar.com.kfgodel.graphdb.api.operations.CreateRelationship;
+import ar.com.kfgodel.graphdb.api.operations.DeleteNode;
+import ar.com.kfgodel.graphdb.api.operations.DeleteRelationship;
 import ar.com.kfgodel.graphdb.impl.EmbeddedNeo4jConfiguration;
 import ar.com.kfgodel.graphdb.impl.EmbeddedNeo4jDb;
 import org.neo4j.graphdb.*;
-import org.neo4j.graphdb.factory.GraphDatabaseFactory;
-import org.neo4j.graphdb.factory.GraphDatabaseSettings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,21 +34,11 @@ public class ProbarBase {
 
     base.start();
     try {
+      LOG.info("Levanto");
       base.ensureTransactionFor(ProbarBase::acciones);
     } finally {
-      base.stop();
-    }
-
-    GraphDatabaseService graphDb = new GraphDatabaseFactory()
-      .newEmbeddedDatabaseBuilder(new File("/home/kfgodel/git/graphdb-by-convention/neodb"))
-      .setConfig(GraphDatabaseSettings.pagecache_memory, "512M")
-      .newGraphDatabase();
-    try {
-      LOG.info("Levanto");
-      dentroDeTransaccion(graphDb);
-    } finally {
       LOG.info("Cerrando");
-      graphDb.shutdown();
+      base.stop();
     }
     LOG.info("Chau");
   }
@@ -58,6 +48,9 @@ public class ProbarBase {
     GraphNode secondNode = CreateNode.create().doWith(graphDbTransaction);
     GraphRelationship relationship = CreateRelationship.create(firstNode, "KNOWS", secondNode).doWith(graphDbTransaction);
 
+    DeleteRelationship.create(relationship).doWith(graphDbTransaction);
+    DeleteNode.create(secondNode).doWith(graphDbTransaction);
+    DeleteNode.create(firstNode).doWith(graphDbTransaction);
     return null;
   }
 
@@ -85,14 +78,4 @@ public class ProbarBase {
     }
   }
 
-  private static void registerShutdownHook(final GraphDatabaseService graphDb) {
-    // Registers a shutdown hook for the Neo4j instance so that it
-    // shuts down nicely when the VM exits (even if you "Ctrl-C" the
-    // running example before it's completed)
-    Runtime.getRuntime().addShutdownHook(new Thread() {
-      @Override
-      public void run() {
-      }
-    });
-  }
 }

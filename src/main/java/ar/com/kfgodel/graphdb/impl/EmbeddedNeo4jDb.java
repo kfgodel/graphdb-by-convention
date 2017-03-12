@@ -49,6 +49,10 @@ public class EmbeddedNeo4jDb implements GraphDb {
     neo4jDb = Optional.empty();
   }
 
+  public Optional<GraphDatabaseService> getNeo4jDb() {
+    return neo4jDb;
+  }
+
   @Override
   public <R> R ensureTransactionFor(TransactionOperation<R> operation) throws GraphDbException {
     GraphDatabaseService createdDb = neo4jDb

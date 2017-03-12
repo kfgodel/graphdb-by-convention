@@ -6,6 +6,7 @@ import ar.com.kfgodel.graphdb.api.concepts.GraphNode;
 import ar.com.kfgodel.graphdb.api.concepts.GraphRelationship;
 import ar.com.kfgodel.graphdb.impl.EmbeddedNeo4jTransaction;
 import ar.com.kfgodel.graphdb.impl.concepts.EmbeddedNeo4jNode;
+import ar.com.kfgodel.graphdb.impl.concepts.EmbeddedNeo4jRelationship;
 import com.google.common.collect.Lists;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -62,6 +63,15 @@ public class EmbeddedNeo4jTransactionTest extends JavaSpec<GraphDbTestContext> {
 
           Mockito.verify(neo4jNode).delete();
         });
+
+        it("can delete a relationship", () -> {
+          Relationship neo4jRelationship = mockear(Relationship.class);
+
+          context().embeddedTransaction().removeRelationship(EmbeddedNeo4jRelationship.create(neo4jRelationship));
+
+          Mockito.verify(neo4jRelationship).delete();
+        });
+
       });
 
     });

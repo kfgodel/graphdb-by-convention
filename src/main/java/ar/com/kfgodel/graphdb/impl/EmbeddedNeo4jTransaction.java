@@ -55,6 +55,24 @@ public class EmbeddedNeo4jTransaction implements GraphDbTransaction {
     asNeo4jNode(node).delete();
   }
 
+  @Override
+  public void removeRelationship(GraphRelationship relationship) {
+    asNeo4jRelationship(relationship).delete();
+  }
+
+  public Transaction getNeo4jTransaction() {
+    return neo4jTransaction;
+  }
+
+  public GraphDatabaseService getNeo4jDb() {
+    return neo4jDb;
+  }
+
+  private Relationship asNeo4jRelationship(GraphRelationship relationship) {
+    EmbeddedNeo4jRelationship embeddedRelationship = (EmbeddedNeo4jRelationship) relationship;
+    return embeddedRelationship.getNeo4jRelationship();
+  }
+
   private RelationshipType asNeo4jRelationshipType(String relationshipTypeName) {
     return RelationshipType.withName(relationshipTypeName);
   }
