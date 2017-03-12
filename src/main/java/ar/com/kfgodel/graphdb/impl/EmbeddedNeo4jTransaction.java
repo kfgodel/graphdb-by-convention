@@ -67,6 +67,11 @@ public class EmbeddedNeo4jTransaction implements GraphDbTransaction {
     asNeo4jpropertyContainer(container).setProperty(propertyName, propertyValue);
   }
 
+  @Override
+  public void removePropertyFrom(PropertyContainer container, String propertyName) {
+    asNeo4jpropertyContainer(container).removeProperty(propertyName);
+  }
+
   private org.neo4j.graphdb.PropertyContainer asNeo4jpropertyContainer(PropertyContainer container) {
     EmbeddedPropertyContainer embeddedContainer = (EmbeddedPropertyContainer) container;
     return embeddedContainer.getNeo4jContainer();

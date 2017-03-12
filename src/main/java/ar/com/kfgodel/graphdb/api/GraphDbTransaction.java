@@ -56,4 +56,11 @@ public interface GraphDbTransaction {
    * @param propertyValue The value to set
    */
   void setPropertyOn(PropertyContainer container, String propertyName, Object propertyValue);
+
+  /**
+   * Removes the property on teh given container
+   * @param container The node or relationship to remove the property from
+   * @param propertyName The name of the property to remove
+   */
+  void removePropertyFrom(PropertyContainer container, String propertyName);
 }

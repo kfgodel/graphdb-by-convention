@@ -5,26 +5,24 @@ import ar.com.kfgodel.graphdb.api.TransactionOperation;
 import ar.com.kfgodel.graphdb.api.concepts.PropertyContainer;
 
 /**
- * This type represents the operation to set the value of a property on a node
+ * This type represents the operation to remove the value of a property on a node
  * Created by kfgodel on 12/03/17.
  */
-public class SetProperty implements TransactionOperation<PropertyContainer> {
+public class RemoveProperty implements TransactionOperation<PropertyContainer> {
 
   private PropertyContainer node;
   private String propertyName;
-  private Object propertyValue;
 
   @Override
   public PropertyContainer doWith(GraphDbTransaction transaction) {
-    transaction.setPropertyOn(node, propertyName, propertyValue);
+    transaction.removePropertyFrom(node, propertyName);
     return node;
   }
 
-  public static SetProperty create(PropertyContainer node, String propertyName, Object propertyValue) {
-    SetProperty action = new SetProperty();
+  public static RemoveProperty create(PropertyContainer node, String propertyName) {
+    RemoveProperty action = new RemoveProperty();
     action.node = node;
     action.propertyName = propertyName;
-    action.propertyValue = propertyValue;
     return action;
   }
 

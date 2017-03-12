@@ -87,6 +87,21 @@ public class EmbeddedNeo4jTransactionTest extends JavaSpec<GraphDbTestContext> {
           Mockito.verify(neo4jRelationship).setProperty("una property", "un valor");
         });
 
+        it("can remove a property from a node",()->{
+          Node neo4jNode = mockear(Node.class);
+
+          context().embeddedTransaction().removePropertyFrom(EmbeddedNeo4jNode.create(neo4jNode), "una property");
+
+          Mockito.verify(neo4jNode).removeProperty("una property");
+        });
+        it("can remove a property from a relationship",()->{
+          Relationship neo4jRelationship = mockear(Relationship.class);
+
+          context().embeddedTransaction().removePropertyFrom(EmbeddedNeo4jRelationship.create(neo4jRelationship), "una property");
+
+          Mockito.verify(neo4jRelationship).removeProperty("una property");
+        });
+
       });
 
     });

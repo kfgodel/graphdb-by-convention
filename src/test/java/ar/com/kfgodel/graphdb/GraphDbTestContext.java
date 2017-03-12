@@ -91,5 +91,8 @@ public interface GraphDbTestContext extends TestContext {
   SetProperty setProperty();
   void setProperty(Supplier<SetProperty> definition);
 
+  RemoveProperty removeProperty();
+  void removeProperty(Supplier<RemoveProperty> definition);
+
 
 }
