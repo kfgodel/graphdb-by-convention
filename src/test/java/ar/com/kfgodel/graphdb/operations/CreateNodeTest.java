@@ -15,6 +15,7 @@ import org.neo4j.graphdb.Node;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static ar.com.kfgodel.graphdb.MockitoHelper.mockear;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -29,7 +30,7 @@ public class CreateNodeTest extends JavaSpec<GraphDbTestContext> {
       context().createNode(CreateNode::create);
 
       describe("given a transaction", () -> {
-        context().transaction(() -> Mockito.mock(GraphDbTransaction.class, Mockito.RETURNS_SMART_NULLS));
+        context().transaction(() -> mockear(GraphDbTransaction.class));
 
         describe("when executed", () -> {
           context().createdNode(() -> context().createNode().doWith(context().transaction()));
@@ -63,7 +64,7 @@ public class CreateNodeTest extends JavaSpec<GraphDbTestContext> {
   }
 
   private Node mockearNodoNeo4j() {
-    Node neo4jNode = Mockito.mock(Node.class, Mockito.RETURNS_SMART_NULLS);
+    Node neo4jNode = mockear(Node.class);
 
     Mockito.when(neo4jNode.getLabels())
       .then(invocation -> {

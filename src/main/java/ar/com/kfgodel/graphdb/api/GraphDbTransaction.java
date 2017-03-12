@@ -32,4 +32,11 @@ public interface GraphDbTransaction {
    * @return The created relationship
    */
   GraphRelationship createRelationship(GraphNode origin, String relationshipType, GraphNode destination);
+
+  /**
+   * Removes the given node from the database
+   *
+   * @param node The node to delete
+   */
+  void removeNode(GraphNode node);
 }

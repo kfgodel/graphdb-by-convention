@@ -7,8 +7,7 @@ import ar.com.kfgodel.graphdb.impl.CleanUpThread;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 
-import static org.mockito.Mockito.RETURNS_SMART_NULLS;
-import static org.mockito.Mockito.mock;
+import static ar.com.kfgodel.graphdb.MockitoHelper.mockear;
 
 /**
  * This type verifies that the cleanup thread behaves as expected when run
@@ -22,7 +21,7 @@ public class CleanUpThreadTest extends JavaSpec<GraphDbTestContext> {
       context().cleanupThread(() -> CleanUpThread.create(context().graphDb()));
 
       describe("given a graph database", () -> {
-        context().graphDb(() -> mock(GraphDb.class, RETURNS_SMART_NULLS));
+        context().graphDb(() -> mockear(GraphDb.class));
 
         it("stops the database when ran", () -> {
           context().cleanupThread().run();

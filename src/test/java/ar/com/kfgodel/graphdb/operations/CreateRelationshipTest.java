@@ -10,6 +10,7 @@ import ar.com.kfgodel.graphdb.api.operations.CreateRelationship;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 
+import static ar.com.kfgodel.graphdb.MockitoHelper.mockear;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -24,16 +25,16 @@ public class CreateRelationshipTest extends JavaSpec<GraphDbTestContext> {
       context().createRelationship(() -> CreateRelationship.create(context().origin(), context().relationshipType(), context().destination()));
 
       describe("given the nodes and the relationship type", () -> {
-        context().origin(() -> Mockito.mock(GraphNode.class, Mockito.RETURNS_SMART_NULLS));
-        context().destination(() -> Mockito.mock(GraphNode.class, Mockito.RETURNS_SMART_NULLS));
+        context().origin(() -> mockear(GraphNode.class));
+        context().destination(() -> mockear(GraphNode.class));
         context().relationshipType(() -> "tipo de relacion");
 
         describe("when a transaction is provided", () -> {
-          context().transaction(() -> Mockito.mock(GraphDbTransaction.class, Mockito.RETURNS_SMART_NULLS));
+          context().transaction(() -> mockear(GraphDbTransaction.class));
 
           it("creates a new relationship", () -> {
             Mockito.when(context().transaction().createRelationship(context().origin(), context().relationshipType(), context().destination()))
-              .thenReturn(Mockito.mock(GraphRelationship.class, Mockito.RETURNS_SMART_NULLS));
+              .thenReturn(mockear(GraphRelationship.class));
 
             GraphRelationship createdRelationship = context().createRelationship().doWith(context().transaction());
             assertThat(createdRelationship).isNotNull();

@@ -35,29 +35,35 @@ public class EmbeddedNeo4jTransaction implements GraphDbTransaction {
 
   @Override
   public GraphNode createNode(List<String> labels) {
-    Label[] nodeLabels = convertLabels(labels);
-    Node node = neo4jDb.createNode(nodeLabels);
+    Node node = neo4jDb.createNode(asNeo4jLabels(labels));
     return EmbeddedNeo4jNode.create(node);
   }
 
   @Override
   public GraphRelationship createRelationship(GraphNode origin, String relationshipTypeName, GraphNode destination) {
-    Node neo4jOrigin = ((EmbeddedNeo4jNode) origin).getNeo4jNode();
-    Node neo4jDestination = ((EmbeddedNeo4jNode) destination).getNeo4jNode();
-    RelationshipType relationshipType = convertRelationshipType(relationshipTypeName);
-    Relationship neo4jRelationship = neo4jOrigin.createRelationshipTo(neo4jDestination, relationshipType);
+    Relationship neo4jRelationship = asNeo4jNode(origin).createRelationshipTo(asNeo4jNode(destination), asNeo4jRelationshipType(relationshipTypeName));
     return EmbeddedNeo4jRelationship.create(neo4jRelationship);
   }
 
-  private RelationshipType convertRelationshipType(String relationshipTypeName) {
+  private Node asNeo4jNode(GraphNode aNode) {
+    EmbeddedNeo4jNode embeddedNode = (EmbeddedNeo4jNode) aNode;
+    return embeddedNode.getNeo4jNode();
+  }
+
+  @Override
+  public void removeNode(GraphNode node) {
+    asNeo4jNode(node).delete();
+  }
+
+  private RelationshipType asNeo4jRelationshipType(String relationshipTypeName) {
     return RelationshipType.withName(relationshipTypeName);
   }
 
-  private Label[] convertLabels(List<String> labels) {
+  private Label[] asNeo4jLabels(List<String> labels) {
     return labels.stream()
       .map(Label::label)
       .collect(Collectors.toList())
-      .toArray(new Label[0]);
+      .toArray(new Label[labels.size()]);
   }
 
 }

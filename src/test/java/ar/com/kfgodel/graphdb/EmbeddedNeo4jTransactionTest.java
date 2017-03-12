@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.neo4j.graphdb.*;
 
+import static ar.com.kfgodel.graphdb.MockitoHelper.mockear;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -25,8 +26,8 @@ public class EmbeddedNeo4jTransactionTest extends JavaSpec<GraphDbTestContext> {
       context().embeddedTransaction(() -> EmbeddedNeo4jTransaction.create(context().neo4jDb(), context().neo4jTransaction()));
 
       describe("given an internal neo4j transaction and a neo4j database", () -> {
-        context().neo4jTransaction(() -> Mockito.mock(Transaction.class, Mockito.RETURNS_SMART_NULLS));
-        context().neo4jDb(() -> Mockito.mock(GraphDatabaseService.class, Mockito.RETURNS_SMART_NULLS));
+        context().neo4jTransaction(() -> mockear(Transaction.class));
+        context().neo4jDb(() -> mockear(GraphDatabaseService.class));
 
         it("marks the transaction as success when committed", () -> {
           context().embeddedTransaction().commit();
@@ -44,8 +45,8 @@ public class EmbeddedNeo4jTransactionTest extends JavaSpec<GraphDbTestContext> {
           context().destination(() -> EmbeddedNeo4jNode.create(context().neo4jDestination()));
           context().relationshipType(() -> "un tipo de relacion");
 
-          context().neo4jOrigin(() -> Mockito.mock(Node.class, Mockito.RETURNS_SMART_NULLS));
-          context().neo4jDestination(() -> Mockito.mock(Node.class, Mockito.RETURNS_SMART_NULLS));
+          context().neo4jOrigin(() -> mockear(Node.class));
+          context().neo4jDestination(() -> mockear(Node.class));
 
           it("creates a new relationship", () -> {
             GraphRelationship relationship = context().embeddedTransaction().createRelationship(context().origin(), context().relationshipType(), context().destination());
@@ -54,6 +55,13 @@ public class EmbeddedNeo4jTransactionTest extends JavaSpec<GraphDbTestContext> {
           });
         });
 
+        it("can delete a node", () -> {
+          Node neo4jNode = mockear(Node.class);
+
+          context().embeddedTransaction().removeNode(EmbeddedNeo4jNode.create(neo4jNode));
+
+          Mockito.verify(neo4jNode).delete();
+        });
       });
 
     });
