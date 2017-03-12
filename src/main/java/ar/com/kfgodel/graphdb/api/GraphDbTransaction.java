@@ -46,4 +46,13 @@ public interface GraphDbTransaction {
    * @param relationship The relationship to delete
    */
   void removeRelationship(GraphRelationship relationship);
+
+  /**
+   * Sets a new property value replacing the previous if there was one
+   *
+   * @param node          The node to set the property on
+   * @param propertyName  The name of the property
+   * @param propertyValue The value to set
+   */
+  void setPropertyOn(GraphNode node, String propertyName, Object propertyValue);
 }

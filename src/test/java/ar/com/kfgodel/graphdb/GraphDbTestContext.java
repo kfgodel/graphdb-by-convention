@@ -5,10 +5,7 @@ import ar.com.kfgodel.graphdb.api.GraphDb;
 import ar.com.kfgodel.graphdb.api.GraphDbTransaction;
 import ar.com.kfgodel.graphdb.api.concepts.GraphNode;
 import ar.com.kfgodel.graphdb.api.concepts.GraphRelationship;
-import ar.com.kfgodel.graphdb.api.operations.CreateNode;
-import ar.com.kfgodel.graphdb.api.operations.CreateRelationship;
-import ar.com.kfgodel.graphdb.api.operations.DeleteNode;
-import ar.com.kfgodel.graphdb.api.operations.DeleteRelationship;
+import ar.com.kfgodel.graphdb.api.operations.*;
 import ar.com.kfgodel.graphdb.impl.CleanUpThread;
 import ar.com.kfgodel.graphdb.impl.EmbeddedNeo4jConfiguration;
 import ar.com.kfgodel.graphdb.impl.EmbeddedNeo4jTransaction;
@@ -80,12 +77,21 @@ public interface GraphDbTestContext extends TestContext {
   void deleteNode(Supplier<DeleteNode> definition);
 
   GraphRelationship relationship();
-
   void relationship(Supplier<GraphRelationship> definition);
 
   DeleteRelationship deleteRelationship();
-
   void deleteRelationship(Supplier<DeleteRelationship> definition);
 
+  String propertyName();
+
+  void propertyName(Supplier<String> definition);
+
+  Object propertyValue();
+
+  void propertyValue(Supplier<Object> definition);
+
+  SetProperty setProperty();
+
+  void setProperty(Supplier<SetProperty> definition);
 
 }

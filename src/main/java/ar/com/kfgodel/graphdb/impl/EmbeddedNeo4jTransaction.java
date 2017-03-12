@@ -60,6 +60,11 @@ public class EmbeddedNeo4jTransaction implements GraphDbTransaction {
     asNeo4jRelationship(relationship).delete();
   }
 
+  @Override
+  public void setPropertyOn(GraphNode node, String propertyName, Object propertyValue) {
+    asNeo4jNode(node).setProperty(propertyName, propertyValue);
+  }
+
   public Transaction getNeo4jTransaction() {
     return neo4jTransaction;
   }
