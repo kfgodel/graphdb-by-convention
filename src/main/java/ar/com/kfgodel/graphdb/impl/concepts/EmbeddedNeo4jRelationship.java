@@ -1,13 +1,14 @@
 package ar.com.kfgodel.graphdb.impl.concepts;
 
 import ar.com.kfgodel.graphdb.api.concepts.GraphRelationship;
+import org.neo4j.graphdb.PropertyContainer;
 import org.neo4j.graphdb.Relationship;
 
 /**
  * This type represents a neo4j relationship
  * Created by kfgodel on 12/03/17.
  */
-public class EmbeddedNeo4jRelationship implements GraphRelationship {
+public class EmbeddedNeo4jRelationship implements GraphRelationship, EmbeddedPropertyContainer {
 
   private Relationship neo4jRelationship;
 
@@ -21,4 +22,8 @@ public class EmbeddedNeo4jRelationship implements GraphRelationship {
     return relationship;
   }
 
+  @Override
+  public PropertyContainer getNeo4jContainer() {
+    return getNeo4jRelationship();
+  }
 }

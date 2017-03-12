@@ -3,8 +3,10 @@ package ar.com.kfgodel.graphdb.impl;
 import ar.com.kfgodel.graphdb.api.GraphDbTransaction;
 import ar.com.kfgodel.graphdb.api.concepts.GraphNode;
 import ar.com.kfgodel.graphdb.api.concepts.GraphRelationship;
+import ar.com.kfgodel.graphdb.api.concepts.PropertyContainer;
 import ar.com.kfgodel.graphdb.impl.concepts.EmbeddedNeo4jNode;
 import ar.com.kfgodel.graphdb.impl.concepts.EmbeddedNeo4jRelationship;
+import ar.com.kfgodel.graphdb.impl.concepts.EmbeddedPropertyContainer;
 import org.neo4j.graphdb.*;
 
 import java.util.List;
@@ -61,8 +63,13 @@ public class EmbeddedNeo4jTransaction implements GraphDbTransaction {
   }
 
   @Override
-  public void setPropertyOn(GraphNode node, String propertyName, Object propertyValue) {
-    asNeo4jNode(node).setProperty(propertyName, propertyValue);
+  public void setPropertyOn(PropertyContainer container, String propertyName, Object propertyValue) {
+    asNeo4jpropertyContainer(container).setProperty(propertyName, propertyValue);
+  }
+
+  private org.neo4j.graphdb.PropertyContainer asNeo4jpropertyContainer(PropertyContainer container) {
+    EmbeddedPropertyContainer embeddedContainer = (EmbeddedPropertyContainer) container;
+    return embeddedContainer.getNeo4jContainer();
   }
 
   public Transaction getNeo4jTransaction() {

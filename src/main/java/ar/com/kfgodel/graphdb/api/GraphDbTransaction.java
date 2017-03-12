@@ -2,6 +2,7 @@ package ar.com.kfgodel.graphdb.api;
 
 import ar.com.kfgodel.graphdb.api.concepts.GraphNode;
 import ar.com.kfgodel.graphdb.api.concepts.GraphRelationship;
+import ar.com.kfgodel.graphdb.api.concepts.PropertyContainer;
 
 import java.util.List;
 
@@ -50,9 +51,9 @@ public interface GraphDbTransaction {
   /**
    * Sets a new property value replacing the previous if there was one
    *
-   * @param node          The node to set the property on
+   * @param container     The node or relationship to set the property on
    * @param propertyName  The name of the property
    * @param propertyValue The value to set
    */
-  void setPropertyOn(GraphNode node, String propertyName, Object propertyValue);
+  void setPropertyOn(PropertyContainer container, String propertyName, Object propertyValue);
 }

@@ -4,10 +4,7 @@ import ar.com.kfgodel.graphdb.api.GraphDb;
 import ar.com.kfgodel.graphdb.api.GraphDbTransaction;
 import ar.com.kfgodel.graphdb.api.concepts.GraphNode;
 import ar.com.kfgodel.graphdb.api.concepts.GraphRelationship;
-import ar.com.kfgodel.graphdb.api.operations.CreateNode;
-import ar.com.kfgodel.graphdb.api.operations.CreateRelationship;
-import ar.com.kfgodel.graphdb.api.operations.DeleteNode;
-import ar.com.kfgodel.graphdb.api.operations.DeleteRelationship;
+import ar.com.kfgodel.graphdb.api.operations.*;
 import ar.com.kfgodel.graphdb.impl.EmbeddedNeo4jConfiguration;
 import ar.com.kfgodel.graphdb.impl.EmbeddedNeo4jDb;
 import org.neo4j.graphdb.*;
@@ -45,8 +42,13 @@ public class ProbarBase {
 
   private static Object acciones(GraphDbTransaction graphDbTransaction) {
     GraphNode firstNode = CreateNode.create().doWith(graphDbTransaction);
+    SetProperty.create(firstNode, "message", "Hello, ").doWith(graphDbTransaction);
+
     GraphNode secondNode = CreateNode.create().doWith(graphDbTransaction);
+    SetProperty.create(firstNode, "message", "World!").doWith(graphDbTransaction);
+
     GraphRelationship relationship = CreateRelationship.create(firstNode, "KNOWS", secondNode).doWith(graphDbTransaction);
+    SetProperty.create(relationship, "message", "brave Neo4j ").doWith(graphDbTransaction);
 
     DeleteRelationship.create(relationship).doWith(graphDbTransaction);
     DeleteNode.create(secondNode).doWith(graphDbTransaction);

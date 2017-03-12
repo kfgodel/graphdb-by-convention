@@ -83,15 +83,13 @@ public interface GraphDbTestContext extends TestContext {
   void deleteRelationship(Supplier<DeleteRelationship> definition);
 
   String propertyName();
-
   void propertyName(Supplier<String> definition);
 
   Object propertyValue();
-
   void propertyValue(Supplier<Object> definition);
 
   SetProperty setProperty();
-
   void setProperty(Supplier<SetProperty> definition);
+
 
 }
