@@ -7,7 +7,6 @@ import ar.com.kfgodel.graphdb.api.concepts.GraphRelationship;
 import ar.com.kfgodel.graphdb.api.operations.*;
 import ar.com.kfgodel.graphdb.impl.EmbeddedNeo4jConfiguration;
 import ar.com.kfgodel.graphdb.impl.EmbeddedNeo4jDb;
-import org.neo4j.graphdb.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,34 +49,14 @@ public class ProbarBase {
     GraphRelationship relationship = CreateRelationship.create(firstNode, "KNOWS", secondNode).doWith(graphDbTransaction);
     SetProperty.create(relationship, "message", "brave Neo4j ").doWith(graphDbTransaction);
 
+    LOG.info("{}", GetProperty.create(firstNode, "message").doWith(graphDbTransaction).get());
+    LOG.info("{}", GetProperty.create(relationship, "message").doWith(graphDbTransaction).get());
+    LOG.info("{}", GetProperty.create(secondNode, "message").doWith(graphDbTransaction).get());
+
     DeleteRelationship.create(relationship).doWith(graphDbTransaction);
     DeleteNode.create(secondNode).doWith(graphDbTransaction);
     DeleteNode.create(firstNode).doWith(graphDbTransaction);
     return null;
-  }
-
-  private static void dentroDeTransaccion(GraphDatabaseService graphDb) {
-    try (Transaction tx = graphDb.beginTx()) {
-
-      Node firstNode = graphDb.createNode();
-      firstNode.setProperty("message", "Hello, ");
-      Node secondNode = graphDb.createNode();
-      secondNode.setProperty("message", "World!");
-
-      Relationship relationship = firstNode.createRelationshipTo(secondNode, RelTypes.KNOWS);
-      relationship.setProperty("message", "brave Neo4j ");
-
-      LOG.info("{}", firstNode.getProperty("message"));
-      LOG.info("{}", relationship.getProperty("message"));
-      LOG.info("{}", secondNode.getProperty("message"));
-
-      firstNode.getSingleRelationship(RelTypes.KNOWS, Direction.OUTGOING).delete();
-      firstNode.delete();
-      secondNode.delete();
-
-      // Database operations go here
-      tx.success();
-    }
   }
 
 }

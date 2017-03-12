@@ -5,7 +5,7 @@ import ar.com.kfgodel.graphdb.api.TransactionOperation;
 import ar.com.kfgodel.graphdb.api.concepts.PropertyContainer;
 
 /**
- * This type represents the operation to set the value of a property on a node
+ * This type represents the operation to set the value of a property on a node or relationship
  * Created by kfgodel on 12/03/17.
  */
 public class SetProperty implements TransactionOperation<PropertyContainer> {

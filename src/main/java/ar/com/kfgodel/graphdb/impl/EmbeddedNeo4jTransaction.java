@@ -7,6 +7,7 @@ import ar.com.kfgodel.graphdb.api.concepts.PropertyContainer;
 import ar.com.kfgodel.graphdb.impl.concepts.EmbeddedNeo4jNode;
 import ar.com.kfgodel.graphdb.impl.concepts.EmbeddedNeo4jRelationship;
 import ar.com.kfgodel.graphdb.impl.concepts.EmbeddedPropertyContainer;
+import ar.com.kfgodel.nary.api.optionals.Optional;
 import org.neo4j.graphdb.*;
 
 import java.util.List;
@@ -70,6 +71,16 @@ public class EmbeddedNeo4jTransaction implements GraphDbTransaction {
   @Override
   public void removePropertyFrom(PropertyContainer container, String propertyName) {
     asNeo4jpropertyContainer(container).removeProperty(propertyName);
+  }
+
+  @Override
+  public <T> Optional<T> getPropertyFrom(PropertyContainer container, String propertyName) {
+    org.neo4j.graphdb.PropertyContainer neo4jContainer = asNeo4jpropertyContainer(container);
+    if(neo4jContainer.hasProperty(propertyName)){
+      T propertyValue = (T) neo4jContainer.getProperty(propertyName);
+      return Optional.of(propertyValue);
+    }
+    return Optional.empty();
   }
 
   private org.neo4j.graphdb.PropertyContainer asNeo4jpropertyContainer(PropertyContainer container) {

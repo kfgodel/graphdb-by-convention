@@ -7,6 +7,7 @@ import ar.com.kfgodel.graphdb.api.concepts.GraphRelationship;
 import ar.com.kfgodel.graphdb.impl.EmbeddedNeo4jTransaction;
 import ar.com.kfgodel.graphdb.impl.concepts.EmbeddedNeo4jNode;
 import ar.com.kfgodel.graphdb.impl.concepts.EmbeddedNeo4jRelationship;
+import ar.com.kfgodel.nary.api.optionals.Optional;
 import com.google.common.collect.Lists;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -72,39 +73,72 @@ public class EmbeddedNeo4jTransactionTest extends JavaSpec<GraphDbTestContext> {
           Mockito.verify(neo4jRelationship).delete();
         });
 
-        it("can set a property value on a node", () -> {
-          Node neo4jNode = mockear(Node.class);
+        describe("properties", () -> {
 
-          context().embeddedTransaction().setPropertyOn(EmbeddedNeo4jNode.create(neo4jNode), "una property", "un valor");
+          it("can set a property value on a node", () -> {
+            Node neo4jNode = mockear(Node.class);
 
-          Mockito.verify(neo4jNode).setProperty("una property", "un valor");
+            context().embeddedTransaction().setPropertyOn(EmbeddedNeo4jNode.create(neo4jNode), "una property", "un valor");
+
+            Mockito.verify(neo4jNode).setProperty("una property", "un valor");
+          });
+          it("can set a property value on a relationship", () -> {
+            Relationship neo4jRelationship = mockear(Relationship.class);
+
+            context().embeddedTransaction().setPropertyOn(EmbeddedNeo4jRelationship.create(neo4jRelationship), "una property", "un valor");
+
+            Mockito.verify(neo4jRelationship).setProperty("una property", "un valor");
+          });
+
+          it("can remove a property from a node",()->{
+            Node neo4jNode = mockear(Node.class);
+
+            context().embeddedTransaction().removePropertyFrom(EmbeddedNeo4jNode.create(neo4jNode), "una property");
+
+            Mockito.verify(neo4jNode).removeProperty("una property");
+          });
+          it("can remove a property from a relationship",()->{
+            Relationship neo4jRelationship = mockear(Relationship.class);
+
+            context().embeddedTransaction().removePropertyFrom(EmbeddedNeo4jRelationship.create(neo4jRelationship), "una property");
+
+            Mockito.verify(neo4jRelationship).removeProperty("una property");
+          });
+
+          it("can get a property value from a node",()->{
+            Node neo4jNode = mockear(Node.class);
+            Mockito.when(neo4jNode.hasProperty("una property")).thenReturn(true);
+
+            context().embeddedTransaction().getPropertyFrom(EmbeddedNeo4jNode.create(neo4jNode), "una property");
+
+            Mockito.verify(neo4jNode).getProperty("una property");
+          });
+          it("gets an empty optional if the node doesn't have a property",()->{
+            Node neo4jNode = mockear(Node.class);
+            Mockito.when(neo4jNode.hasProperty("una property")).thenReturn(false);
+
+            Optional<Object> result = context().embeddedTransaction().getPropertyFrom(EmbeddedNeo4jNode.create(neo4jNode), "una property");
+
+            assertThat(result.isAbsent()).isTrue();
+          });
+          it("can get a property value from a relationship",()->{
+            Relationship neo4jRelationship = mockear(Relationship.class);
+            Mockito.when(neo4jRelationship.hasProperty("una property")).thenReturn(true);
+
+            context().embeddedTransaction().getPropertyFrom(EmbeddedNeo4jRelationship.create(neo4jRelationship), "una property");
+
+            Mockito.verify(neo4jRelationship).getProperty("una property");
+          });
+          it("gets an empty optional if the relationship doesn't have the property",()->{
+            Relationship neo4jRelationship = mockear(Relationship.class);
+            Mockito.when(neo4jRelationship.hasProperty("una property")).thenReturn(false);
+
+            Optional<Object> result = context().embeddedTransaction().getPropertyFrom(EmbeddedNeo4jRelationship.create(neo4jRelationship), "una property");
+
+            assertThat(result.isAbsent()).isTrue();
+          });   
         });
-        it("can set a property value on a relationship", () -> {
-          Relationship neo4jRelationship = mockear(Relationship.class);
-
-          context().embeddedTransaction().setPropertyOn(EmbeddedNeo4jRelationship.create(neo4jRelationship), "una property", "un valor");
-
-          Mockito.verify(neo4jRelationship).setProperty("una property", "un valor");
-        });
-
-        it("can remove a property from a node",()->{
-          Node neo4jNode = mockear(Node.class);
-
-          context().embeddedTransaction().removePropertyFrom(EmbeddedNeo4jNode.create(neo4jNode), "una property");
-
-          Mockito.verify(neo4jNode).removeProperty("una property");
-        });
-        it("can remove a property from a relationship",()->{
-          Relationship neo4jRelationship = mockear(Relationship.class);
-
-          context().embeddedTransaction().removePropertyFrom(EmbeddedNeo4jRelationship.create(neo4jRelationship), "una property");
-
-          Mockito.verify(neo4jRelationship).removeProperty("una property");
-        });
-
       });
-
     });
-
   }
 }

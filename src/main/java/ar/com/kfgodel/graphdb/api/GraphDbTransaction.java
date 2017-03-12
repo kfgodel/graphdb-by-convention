@@ -3,6 +3,7 @@ package ar.com.kfgodel.graphdb.api;
 import ar.com.kfgodel.graphdb.api.concepts.GraphNode;
 import ar.com.kfgodel.graphdb.api.concepts.GraphRelationship;
 import ar.com.kfgodel.graphdb.api.concepts.PropertyContainer;
+import ar.com.kfgodel.nary.api.optionals.Optional;
 
 import java.util.List;
 
@@ -63,4 +64,11 @@ public interface GraphDbTransaction {
    * @param propertyName The name of the property to remove
    */
   void removePropertyFrom(PropertyContainer container, String propertyName);
+
+  /**
+   * Retrieves the property value for the giben container
+   * @param container The node or relationship to retrieve the value from
+   * @param propertyName The name of the property
+   */
+  <T> Optional<T> getPropertyFrom(PropertyContainer container, String propertyName);
 }
