@@ -1,7 +1,8 @@
-package ar.com.kfgodel.graphdb;
+package ar.com.kfgodel.graphdb.embedded;
 
 import ar.com.dgarcia.javaspec.api.JavaSpec;
 import ar.com.dgarcia.javaspec.api.JavaSpecRunner;
+import ar.com.kfgodel.graphdb.GraphDbTestContext;
 import ar.com.kfgodel.graphdb.impl.EmbeddedNeo4jConfiguration;
 import org.junit.runner.RunWith;
 

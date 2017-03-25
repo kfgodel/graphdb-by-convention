@@ -1,6 +1,6 @@
 package ar.com.kfgodel.graphdb.impl;
 
-import ar.com.kfgodel.graphdb.api.GraphDbConfiguration;
+import ar.com.kfgodel.graphdb.api.configuration.GraphDbConfiguration;
 
 import java.io.File;
 

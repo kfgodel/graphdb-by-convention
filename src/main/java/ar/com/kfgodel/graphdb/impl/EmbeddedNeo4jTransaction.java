@@ -7,6 +7,7 @@ import ar.com.kfgodel.graphdb.api.operations.GraphDbTransaction;
 import ar.com.kfgodel.graphdb.impl.concepts.EmbeddedNeo4jNode;
 import ar.com.kfgodel.graphdb.impl.concepts.EmbeddedNeo4jRelationship;
 import ar.com.kfgodel.graphdb.impl.concepts.EmbeddedPropertyContainer;
+import ar.com.kfgodel.nary.api.Nary;
 import ar.com.kfgodel.nary.api.optionals.Optional;
 import org.neo4j.graphdb.*;
 
@@ -81,6 +82,12 @@ public class EmbeddedNeo4jTransaction implements GraphDbTransaction {
       return Optional.of(propertyValue);
     }
     return Optional.empty();
+  }
+
+  @Override
+  public Nary<GraphNode> getAllNodes() {
+    return Nary.create(neo4jDb.getAllNodes())
+      .mapNary(EmbeddedNeo4jNode::create);
   }
 
   private org.neo4j.graphdb.PropertyContainer asNeo4jpropertyContainer(PropertyContainer container) {

@@ -1,9 +1,10 @@
-package ar.com.kfgodel.graphdb;
+package ar.com.kfgodel.graphdb.embedded;
 
 import ar.com.dgarcia.javaspec.api.JavaSpec;
 import ar.com.dgarcia.javaspec.api.JavaSpecRunner;
 import ar.com.dgarcia.javaspec.api.variable.Variable;
-import ar.com.kfgodel.graphdb.api.GraphDbException;
+import ar.com.kfgodel.graphdb.GraphDbTestContext;
+import ar.com.kfgodel.graphdb.api.exceptions.GraphDbException;
 import ar.com.kfgodel.graphdb.api.operations.GraphDbTransaction;
 import ar.com.kfgodel.graphdb.api.operations.TransactionOperation;
 import ar.com.kfgodel.graphdb.impl.EmbeddedNeo4jConfiguration;

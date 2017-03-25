@@ -1,4 +1,4 @@
-package ar.com.kfgodel.graphdb.api;
+package ar.com.kfgodel.graphdb.api.configuration;
 
 /**
  * This type represents the configuration needed to crate a graph database

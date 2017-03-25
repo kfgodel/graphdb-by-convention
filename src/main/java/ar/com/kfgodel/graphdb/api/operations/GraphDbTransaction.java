@@ -3,6 +3,7 @@ package ar.com.kfgodel.graphdb.api.operations;
 import ar.com.kfgodel.graphdb.api.concepts.GraphNode;
 import ar.com.kfgodel.graphdb.api.concepts.GraphRelationship;
 import ar.com.kfgodel.graphdb.api.concepts.PropertyContainer;
+import ar.com.kfgodel.nary.api.Nary;
 import ar.com.kfgodel.nary.api.optionals.Optional;
 
 import java.util.List;
@@ -71,4 +72,10 @@ public interface GraphDbTransaction {
    * @param propertyName The name of the property
    */
   <T> Optional<T> getPropertyFrom(PropertyContainer container, String propertyName);
+
+  /**
+   * Retrieves all the nodes in the database
+   * @return The nodes on the database
+   */
+  Nary<GraphNode> getAllNodes();
 }

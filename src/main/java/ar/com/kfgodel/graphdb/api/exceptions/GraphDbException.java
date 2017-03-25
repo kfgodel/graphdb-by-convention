@@ -1,4 +1,4 @@
-package ar.com.kfgodel.graphdb.api;
+package ar.com.kfgodel.graphdb.api.exceptions;
 
 /**
  * This type represents an error using the database

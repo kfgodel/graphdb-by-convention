@@ -1,12 +1,15 @@
-package ar.com.kfgodel.graphdb;
+package ar.com.kfgodel.graphdb.embedded;
 
 import ar.com.dgarcia.javaspec.api.JavaSpec;
 import ar.com.dgarcia.javaspec.api.JavaSpecRunner;
+import ar.com.kfgodel.graphdb.GraphDbTestContext;
 import ar.com.kfgodel.graphdb.api.concepts.GraphNode;
 import ar.com.kfgodel.graphdb.api.concepts.GraphRelationship;
 import ar.com.kfgodel.graphdb.impl.EmbeddedNeo4jTransaction;
 import ar.com.kfgodel.graphdb.impl.concepts.EmbeddedNeo4jNode;
 import ar.com.kfgodel.graphdb.impl.concepts.EmbeddedNeo4jRelationship;
+import ar.com.kfgodel.graphdb.iteration.FakeResourceIterable;
+import ar.com.kfgodel.nary.api.Nary;
 import ar.com.kfgodel.nary.api.optionals.Optional;
 import com.google.common.collect.Lists;
 import org.junit.runner.RunWith;
@@ -138,6 +141,17 @@ public class EmbeddedNeo4jTransactionTest extends JavaSpec<GraphDbTestContext> {
             assertThat(result.isAbsent()).isTrue();
           });   
         });
+
+        it("can retrieve all the nodes in the database",()->{
+          Mockito.when(context().neo4jDb().getAllNodes())
+            .thenReturn(FakeResourceIterable.create(mockear(Node.class)));
+
+          Nary<GraphNode> allNodes = context().embeddedTransaction().getAllNodes();
+          assertThat(allNodes.count()).isEqualTo(1);
+
+          Mockito.verify(context().neo4jDb()).getAllNodes();
+        });
+
       });
     });
   }

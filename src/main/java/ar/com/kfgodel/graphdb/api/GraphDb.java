@@ -1,5 +1,6 @@
 package ar.com.kfgodel.graphdb.api;
 
+import ar.com.kfgodel.graphdb.api.exceptions.GraphDbException;
 import ar.com.kfgodel.graphdb.api.operations.TransactionOperation;
 
 /**
