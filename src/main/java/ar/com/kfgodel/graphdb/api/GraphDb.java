@@ -1,5 +1,7 @@
 package ar.com.kfgodel.graphdb.api;
 
+import ar.com.kfgodel.graphdb.api.operations.TransactionOperation;
+
 /**
  * This type represents a graph based database in which operations can be done to create nodes, relationships,
  * query the state and remove them

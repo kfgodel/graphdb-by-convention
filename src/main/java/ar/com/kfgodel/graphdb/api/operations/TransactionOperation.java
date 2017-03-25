@@ -1,4 +1,4 @@
-package ar.com.kfgodel.graphdb.api;
+package ar.com.kfgodel.graphdb.api.operations;
 
 /**
  * This type represents an operation in a graph db that needs access to a transaction

@@ -1,9 +1,9 @@
 package ar.com.kfgodel.graphdb.impl;
 
-import ar.com.kfgodel.graphdb.api.GraphDbTransaction;
 import ar.com.kfgodel.graphdb.api.concepts.GraphNode;
 import ar.com.kfgodel.graphdb.api.concepts.GraphRelationship;
 import ar.com.kfgodel.graphdb.api.concepts.PropertyContainer;
+import ar.com.kfgodel.graphdb.api.operations.GraphDbTransaction;
 import ar.com.kfgodel.graphdb.impl.concepts.EmbeddedNeo4jNode;
 import ar.com.kfgodel.graphdb.impl.concepts.EmbeddedNeo4jRelationship;
 import ar.com.kfgodel.graphdb.impl.concepts.EmbeddedPropertyContainer;

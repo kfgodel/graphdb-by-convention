@@ -1,7 +1,5 @@
 package ar.com.kfgodel.graphdb.api.operations;
 
-import ar.com.kfgodel.graphdb.api.GraphDbTransaction;
-import ar.com.kfgodel.graphdb.api.TransactionOperation;
 import ar.com.kfgodel.graphdb.api.concepts.PropertyContainer;
 import ar.com.kfgodel.nary.api.optionals.Optional;
 

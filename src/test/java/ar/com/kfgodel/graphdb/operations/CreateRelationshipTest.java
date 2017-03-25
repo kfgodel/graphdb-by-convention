@@ -3,10 +3,10 @@ package ar.com.kfgodel.graphdb.operations;
 import ar.com.dgarcia.javaspec.api.JavaSpec;
 import ar.com.dgarcia.javaspec.api.JavaSpecRunner;
 import ar.com.kfgodel.graphdb.GraphDbTestContext;
-import ar.com.kfgodel.graphdb.api.GraphDbTransaction;
 import ar.com.kfgodel.graphdb.api.concepts.GraphNode;
 import ar.com.kfgodel.graphdb.api.concepts.GraphRelationship;
 import ar.com.kfgodel.graphdb.api.operations.CreateRelationship;
+import ar.com.kfgodel.graphdb.api.operations.GraphDbTransaction;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 

@@ -2,7 +2,7 @@ package ar.com.kfgodel.graphdb.impl;
 
 import ar.com.kfgodel.graphdb.api.GraphDb;
 import ar.com.kfgodel.graphdb.api.GraphDbException;
-import ar.com.kfgodel.graphdb.api.TransactionOperation;
+import ar.com.kfgodel.graphdb.api.operations.TransactionOperation;
 import ar.com.kfgodel.nary.api.optionals.Optional;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Transaction;

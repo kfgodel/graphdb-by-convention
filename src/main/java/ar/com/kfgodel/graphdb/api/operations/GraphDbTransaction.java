@@ -1,4 +1,4 @@
-package ar.com.kfgodel.graphdb.api;
+package ar.com.kfgodel.graphdb.api.operations;
 
 import ar.com.kfgodel.graphdb.api.concepts.GraphNode;
 import ar.com.kfgodel.graphdb.api.concepts.GraphRelationship;
