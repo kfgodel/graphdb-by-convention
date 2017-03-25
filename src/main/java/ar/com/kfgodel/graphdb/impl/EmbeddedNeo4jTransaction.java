@@ -12,6 +12,7 @@ import ar.com.kfgodel.nary.api.optionals.Optional;
 import org.neo4j.graphdb.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -94,6 +95,12 @@ public class EmbeddedNeo4jTransaction implements GraphDbTransaction {
   public Nary<GraphRelationship> getAllRelationships() {
     return Nary.create(neo4jDb.getAllRelationships())
       .mapNary(EmbeddedNeo4jRelationship::create);
+  }
+
+  @Override
+  public Nary<Map<String, Object>> getResultsFor(String query) {
+    Result result = neo4jDb.execute(query);
+    return Nary.create(result);
   }
 
   private org.neo4j.graphdb.PropertyContainer asNeo4jpropertyContainer(PropertyContainer container) {

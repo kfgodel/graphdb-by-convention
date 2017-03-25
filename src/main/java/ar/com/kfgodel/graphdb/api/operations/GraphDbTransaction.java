@@ -7,6 +7,7 @@ import ar.com.kfgodel.nary.api.Nary;
 import ar.com.kfgodel.nary.api.optionals.Optional;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * This type represents a database transaction for a graph db
@@ -84,4 +85,11 @@ public interface GraphDbTransaction {
    * @return The relationships to iterate
    */
   Nary<GraphRelationship> getAllRelationships();
+
+  /**
+   * Executes the given query on the database and returns an unstructured set of resutls
+   * @param query The query to execute
+   * @return The results
+   */
+  Nary<Map<String,Object>> getResultsFor(String query);
 }

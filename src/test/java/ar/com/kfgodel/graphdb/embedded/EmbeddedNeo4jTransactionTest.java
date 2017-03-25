@@ -16,6 +16,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.neo4j.graphdb.*;
 
+import java.util.Map;
+
 import static ar.com.kfgodel.graphdb.MockitoHelper.mockear;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -152,7 +154,7 @@ public class EmbeddedNeo4jTransactionTest extends JavaSpec<GraphDbTestContext> {
           Mockito.verify(context().neo4jDb()).getAllNodes();
         });
 
-        it("can retrieve all the nodes in the database",()->{
+        it("can retrieve all the relationships in the database",()->{
           Mockito.when(context().neo4jDb().getAllRelationships())
             .thenReturn(FakeResourceIterable.create(mockear(Relationship.class)));
 
@@ -160,6 +162,17 @@ public class EmbeddedNeo4jTransactionTest extends JavaSpec<GraphDbTestContext> {
           assertThat(allRelationships.count()).isEqualTo(1);
 
           Mockito.verify(context().neo4jDb()).getAllRelationships();
+        });
+
+        it("can retrieve a set of result rows from a query in the database",()->{
+          Result fakeResult = mockear(Result.class);
+          Mockito.when(context().neo4jDb().execute("a query"))
+            .thenReturn(fakeResult);
+
+          Nary<Map<String, Object>> results = context().embeddedTransaction().getResultsFor("a query");
+          assertThat(results.count()).isEqualTo(0);
+
+          Mockito.verify(context().neo4jDb()).execute("a query");
         });
       });
     });
