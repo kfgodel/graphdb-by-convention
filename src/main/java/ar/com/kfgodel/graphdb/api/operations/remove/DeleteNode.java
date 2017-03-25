@@ -1,6 +1,8 @@
-package ar.com.kfgodel.graphdb.api.operations;
+package ar.com.kfgodel.graphdb.api.operations.remove;
 
 import ar.com.kfgodel.graphdb.api.concepts.GraphNode;
+import ar.com.kfgodel.graphdb.api.operations.GraphDbTransaction;
+import ar.com.kfgodel.graphdb.api.operations.TransactionOperation;
 
 /**
  * This type represents the operation of deleting a node from the database

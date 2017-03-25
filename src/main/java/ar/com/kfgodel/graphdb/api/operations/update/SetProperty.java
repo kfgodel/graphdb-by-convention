@@ -1,6 +1,8 @@
-package ar.com.kfgodel.graphdb.api.operations;
+package ar.com.kfgodel.graphdb.api.operations.update;
 
 import ar.com.kfgodel.graphdb.api.concepts.PropertyContainer;
+import ar.com.kfgodel.graphdb.api.operations.GraphDbTransaction;
+import ar.com.kfgodel.graphdb.api.operations.TransactionOperation;
 
 /**
  * This type represents the operation to set the value of a property on a node or relationship

@@ -5,7 +5,7 @@ import ar.com.dgarcia.javaspec.api.JavaSpecRunner;
 import ar.com.kfgodel.graphdb.GraphDbTestContext;
 import ar.com.kfgodel.graphdb.api.concepts.GraphRelationship;
 import ar.com.kfgodel.graphdb.api.operations.GraphDbTransaction;
-import ar.com.kfgodel.graphdb.api.operations.RemoveProperty;
+import ar.com.kfgodel.graphdb.api.operations.remove.RemoveProperty;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 

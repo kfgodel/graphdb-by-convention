@@ -1,6 +1,8 @@
-package ar.com.kfgodel.graphdb.api.operations;
+package ar.com.kfgodel.graphdb.api.operations.create;
 
 import ar.com.kfgodel.graphdb.api.concepts.GraphNode;
+import ar.com.kfgodel.graphdb.api.operations.GraphDbTransaction;
+import ar.com.kfgodel.graphdb.api.operations.TransactionOperation;
 
 import java.util.ArrayList;
 import java.util.List;

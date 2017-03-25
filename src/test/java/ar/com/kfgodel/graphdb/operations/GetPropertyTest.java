@@ -4,8 +4,8 @@ import ar.com.dgarcia.javaspec.api.JavaSpec;
 import ar.com.dgarcia.javaspec.api.JavaSpecRunner;
 import ar.com.kfgodel.graphdb.GraphDbTestContext;
 import ar.com.kfgodel.graphdb.api.concepts.GraphNode;
-import ar.com.kfgodel.graphdb.api.operations.GetProperty;
 import ar.com.kfgodel.graphdb.api.operations.GraphDbTransaction;
+import ar.com.kfgodel.graphdb.api.operations.find.GetProperty;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 

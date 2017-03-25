@@ -1,7 +1,9 @@
-package ar.com.kfgodel.graphdb.api.operations;
+package ar.com.kfgodel.graphdb.api.operations.create;
 
 import ar.com.kfgodel.graphdb.api.concepts.GraphNode;
 import ar.com.kfgodel.graphdb.api.concepts.GraphRelationship;
+import ar.com.kfgodel.graphdb.api.operations.GraphDbTransaction;
+import ar.com.kfgodel.graphdb.api.operations.TransactionOperation;
 
 /**
  * This type represents the action to create a relationship between nodes
