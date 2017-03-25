@@ -1,4 +1,4 @@
-package ar.com.kfgodel.graphdb.operations;
+package ar.com.kfgodel.graphdb.operations.create;
 
 import ar.com.dgarcia.javaspec.api.JavaSpec;
 import ar.com.dgarcia.javaspec.api.JavaSpecRunner;

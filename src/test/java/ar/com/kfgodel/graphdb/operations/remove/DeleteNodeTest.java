@@ -1,37 +1,36 @@
-package ar.com.kfgodel.graphdb.operations;
+package ar.com.kfgodel.graphdb.operations.remove;
 
 import ar.com.dgarcia.javaspec.api.JavaSpec;
 import ar.com.dgarcia.javaspec.api.JavaSpecRunner;
 import ar.com.kfgodel.graphdb.GraphDbTestContext;
 import ar.com.kfgodel.graphdb.api.concepts.GraphNode;
 import ar.com.kfgodel.graphdb.api.operations.GraphDbTransaction;
-import ar.com.kfgodel.graphdb.api.operations.find.GetProperty;
+import ar.com.kfgodel.graphdb.api.operations.remove.DeleteNode;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 
 import static ar.com.kfgodel.graphdb.MockitoHelper.mockear;
 
 /**
- * This type verifies the behavior for the property getter action
+ * This type verifies the behavior for the node deletion action
  * Created by kfgodel on 12/03/17.
  */
 @RunWith(JavaSpecRunner.class)
-public class GetPropertyTest extends JavaSpec<GraphDbTestContext> {
+public class DeleteNodeTest extends JavaSpec<GraphDbTestContext> {
   @Override
   public void define() {
-    describe("a property getter operation", () -> {
-      context().getProperty(() -> GetProperty.create(context().node(), context().propertyName()));
+    describe("a node deletion operation", () -> {
+      context().deleteNode(() -> DeleteNode.create(context().node()));
 
       describe("given a transaction", () -> {
         context().transaction(() -> mockear(GraphDbTransaction.class));
 
-        it("gets the value from the node", () -> {
+        it("removes the node from the graph", () -> {
           context().node(() -> mockear(GraphNode.class));
-          context().propertyName(() -> "un nombre");
 
-          context().getProperty().doWith(context().transaction());
+          context().deleteNode().doWith(context().transaction());
 
-          Mockito.verify(context().transaction()).getPropertyFrom(context().node(), context().propertyName());
+          Mockito.verify(context().transaction()).removeNode(context().node());
         });
 
       });

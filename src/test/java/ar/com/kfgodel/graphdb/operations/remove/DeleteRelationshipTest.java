@@ -1,37 +1,36 @@
-package ar.com.kfgodel.graphdb.operations;
+package ar.com.kfgodel.graphdb.operations.remove;
 
 import ar.com.dgarcia.javaspec.api.JavaSpec;
 import ar.com.dgarcia.javaspec.api.JavaSpecRunner;
 import ar.com.kfgodel.graphdb.GraphDbTestContext;
 import ar.com.kfgodel.graphdb.api.concepts.GraphRelationship;
 import ar.com.kfgodel.graphdb.api.operations.GraphDbTransaction;
-import ar.com.kfgodel.graphdb.api.operations.remove.RemoveProperty;
+import ar.com.kfgodel.graphdb.api.operations.remove.DeleteRelationship;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 
 import static ar.com.kfgodel.graphdb.MockitoHelper.mockear;
 
 /**
- * This type verifies the behavior for the property remover action
+ * This type verifies the behavior for the relationship deletion action
  * Created by kfgodel on 12/03/17.
  */
 @RunWith(JavaSpecRunner.class)
-public class RemovePropertyTest extends JavaSpec<GraphDbTestContext> {
+public class DeleteRelationshipTest extends JavaSpec<GraphDbTestContext> {
   @Override
   public void define() {
-    describe("a property remover operation", () -> {
-      context().removeProperty(() -> RemoveProperty.create(context().relationship(), context().propertyName()));
+    describe("a relationship deletion operation", () -> {
+      context().deleteRelationship(() -> DeleteRelationship.create(context().relationship()));
 
       describe("given a transaction", () -> {
         context().transaction(() -> mockear(GraphDbTransaction.class));
 
-        it("removes the property on the container", () -> {
+        it("removes the relatinship from the graph", () -> {
           context().relationship(() -> mockear(GraphRelationship.class));
-          context().propertyName(() -> "un nombre");
 
-          context().removeProperty().doWith(context().transaction());
+          context().deleteRelationship().doWith(context().transaction());
 
-          Mockito.verify(context().transaction()).removePropertyFrom(context().relationship(), context().propertyName());
+          Mockito.verify(context().transaction()).removeRelationship(context().relationship());
         });
 
       });
