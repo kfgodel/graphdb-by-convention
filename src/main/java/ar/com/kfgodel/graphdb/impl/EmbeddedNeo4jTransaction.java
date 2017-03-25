@@ -90,6 +90,12 @@ public class EmbeddedNeo4jTransaction implements GraphDbTransaction {
       .mapNary(EmbeddedNeo4jNode::create);
   }
 
+  @Override
+  public Nary<GraphRelationship> getAllRelationships() {
+    return Nary.create(neo4jDb.getAllRelationships())
+      .mapNary(EmbeddedNeo4jRelationship::create);
+  }
+
   private org.neo4j.graphdb.PropertyContainer asNeo4jpropertyContainer(PropertyContainer container) {
     EmbeddedPropertyContainer embeddedContainer = (EmbeddedPropertyContainer) container;
     return embeddedContainer.getNeo4jContainer();

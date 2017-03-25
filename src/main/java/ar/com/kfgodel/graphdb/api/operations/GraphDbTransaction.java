@@ -78,4 +78,10 @@ public interface GraphDbTransaction {
    * @return The nodes on the database
    */
   Nary<GraphNode> getAllNodes();
+
+  /**
+   * Retrieves all the relationships from the database
+   * @return The relationships to iterate
+   */
+  Nary<GraphRelationship> getAllRelationships();
 }

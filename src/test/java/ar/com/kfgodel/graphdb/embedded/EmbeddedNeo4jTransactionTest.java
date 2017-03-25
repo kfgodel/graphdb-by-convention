@@ -152,6 +152,15 @@ public class EmbeddedNeo4jTransactionTest extends JavaSpec<GraphDbTestContext> {
           Mockito.verify(context().neo4jDb()).getAllNodes();
         });
 
+        it("can retrieve all the nodes in the database",()->{
+          Mockito.when(context().neo4jDb().getAllRelationships())
+            .thenReturn(FakeResourceIterable.create(mockear(Relationship.class)));
+
+          Nary<GraphRelationship> allRelationships = context().embeddedTransaction().getAllRelationships();
+          assertThat(allRelationships.count()).isEqualTo(1);
+
+          Mockito.verify(context().neo4jDb()).getAllRelationships();
+        });
       });
     });
   }
