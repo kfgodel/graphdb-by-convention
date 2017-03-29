@@ -8,6 +8,8 @@ import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.graphdb.factory.GraphDatabaseSettings;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -16,6 +18,7 @@ import org.neo4j.graphdb.factory.GraphDatabaseSettings;
  * Created by kfgodel on 11/03/17.
  */
 public class EmbeddedNeo4jDb implements GraphDb {
+  public static Logger LOG = LoggerFactory.getLogger(EmbeddedNeo4jDb.class);
 
   private EmbeddedNeo4jConfiguration configuration;
   private Optional<GraphDatabaseService> neo4jDb;
@@ -44,7 +47,11 @@ public class EmbeddedNeo4jDb implements GraphDb {
   public void stop() {
     neo4jDb.ifPresent((createdDb) -> {
       createdDb.shutdown();
-      Runtime.getRuntime().removeShutdownHook(cleanupThread);
+      try {
+        Runtime.getRuntime().removeShutdownHook(cleanupThread);
+      } catch (IllegalStateException e) {
+        LOG.debug("No pudimos quitar el hook, probablemente porque ya estamos en shutdown", e);
+      }
     });
     neo4jDb = Optional.empty();
   }
