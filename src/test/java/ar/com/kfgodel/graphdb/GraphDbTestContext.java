@@ -7,10 +7,7 @@ import ar.com.kfgodel.graphdb.api.concepts.GraphRelationship;
 import ar.com.kfgodel.graphdb.api.operations.GraphDbTransaction;
 import ar.com.kfgodel.graphdb.api.operations.create.CreateNode;
 import ar.com.kfgodel.graphdb.api.operations.create.CreateRelationship;
-import ar.com.kfgodel.graphdb.api.operations.find.GetAllNodes;
-import ar.com.kfgodel.graphdb.api.operations.find.GetAllRelationships;
-import ar.com.kfgodel.graphdb.api.operations.find.GetProperty;
-import ar.com.kfgodel.graphdb.api.operations.find.GetResultRows;
+import ar.com.kfgodel.graphdb.api.operations.find.*;
 import ar.com.kfgodel.graphdb.api.operations.remove.DeleteNode;
 import ar.com.kfgodel.graphdb.api.operations.remove.DeleteRelationship;
 import ar.com.kfgodel.graphdb.api.operations.remove.RemoveProperty;
@@ -114,5 +111,11 @@ public interface GraphDbTestContext extends TestContext {
 
   GetResultRows getResultRows();
   void getResultRows(Supplier<GetResultRows> definition);
+
+  GetNodeById getNodeById();
+  void getNodeById(Supplier<GetNodeById> definition);
+
+  GetRelationshipById getRelationshipById();
+  void getRelationshipById(Supplier<GetRelationshipById> definition);
 
 }

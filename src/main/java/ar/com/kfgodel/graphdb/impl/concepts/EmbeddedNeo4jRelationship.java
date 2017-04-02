@@ -26,4 +26,9 @@ public class EmbeddedNeo4jRelationship implements GraphRelationship, EmbeddedPro
   public PropertyContainer getNeo4jContainer() {
     return getNeo4jRelationship();
   }
+
+  @Override
+  public long getId() {
+    return neo4jRelationship.getId();
+  }
 }

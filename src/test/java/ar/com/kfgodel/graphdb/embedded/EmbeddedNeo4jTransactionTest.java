@@ -174,6 +174,38 @@ public class EmbeddedNeo4jTransactionTest extends JavaSpec<GraphDbTestContext> {
 
           Mockito.verify(context().neo4jDb()).execute("a query");
         });
+
+        it("retrieves a node by id from the database if exists",()->{
+          Mockito.when(context().neo4jDb().getNodeById(3))
+            .thenReturn(mockear(Node.class));
+
+          Optional<GraphNode> foundNode = context().embeddedTransaction().getNodeById(3);
+          assertThat(foundNode.isPresent()).isTrue();
+        });
+        it("retrieves an empty optional if no node exists by id",()->{
+          Mockito.when(context().neo4jDb().getNodeById(3))
+            .thenThrow(new NotFoundException());
+
+          Optional<GraphNode> foundNode = context().embeddedTransaction().getNodeById(3);
+          assertThat(foundNode.isAbsent()).isTrue();
+        });
+
+
+        it("retrieves a relationship by id from the database if exists",()->{
+          Mockito.when(context().neo4jDb().getRelationshipById(5))
+            .thenReturn(mockear(Relationship.class));
+
+          Optional<GraphRelationship> foundRelationship = context().embeddedTransaction().getRelationshipById(5);
+          assertThat(foundRelationship.isPresent()).isTrue();
+        });
+        it("retrieves an empty optional if no relationship exists by id",()->{
+          Mockito.when(context().neo4jDb().getRelationshipById(5))
+            .thenThrow(new NotFoundException());
+
+          Optional<GraphRelationship> foundRelationship = context().embeddedTransaction().getRelationshipById(5);
+          assertThat(foundRelationship.isAbsent()).isTrue();
+        });
+
       });
     });
   }

@@ -92,4 +92,18 @@ public interface GraphDbTransaction {
    * @return The results
    */
   Nary<Map<String,Object>> getResultsFor(String query);
+
+  /**
+   * Returns a node identified by its id, if present
+   * @param nodeId The node identifier
+   * @return The node or empty optional
+   */
+  Optional<GraphNode> getNodeById(long nodeId);
+
+  /**
+   * Returns the existing relationship identified by the given number
+   * @param relationshipId The number that currently identifies the relationship
+   * @return An optional with the relationship or empty if none exists
+   */
+  Optional<GraphRelationship> getRelationshipById(long relationshipId);
 }

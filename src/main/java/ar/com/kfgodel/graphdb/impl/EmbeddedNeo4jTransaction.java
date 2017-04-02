@@ -103,6 +103,26 @@ public class EmbeddedNeo4jTransaction implements GraphDbTransaction {
     return Nary.create(result);
   }
 
+  @Override
+  public Optional<GraphNode> getNodeById(long nodeId) {
+    try {
+      Node neo4jNode = neo4jDb.getNodeById(nodeId);
+      return Optional.of(EmbeddedNeo4jNode.create(neo4jNode));
+    } catch (NotFoundException e) {
+      return Optional.empty();
+    }
+  }
+
+  @Override
+  public Optional<GraphRelationship> getRelationshipById(long relationshipId) {
+    try {
+      Relationship neo4jRelationship = neo4jDb.getRelationshipById(relationshipId);
+      return Optional.of(EmbeddedNeo4jRelationship.create(neo4jRelationship));
+    } catch (NotFoundException e) {
+      return Optional.empty();
+    }
+  }
+
   private org.neo4j.graphdb.PropertyContainer asNeo4jpropertyContainer(PropertyContainer container) {
     EmbeddedPropertyContainer embeddedContainer = (EmbeddedPropertyContainer) container;
     return embeddedContainer.getNeo4jContainer();

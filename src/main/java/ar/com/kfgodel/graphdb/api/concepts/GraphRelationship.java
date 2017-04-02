@@ -5,4 +5,9 @@ package ar.com.kfgodel.graphdb.api.concepts;
  * Created by kfgodel on 12/03/17.
  */
 public interface GraphRelationship extends PropertyContainer {
+
+  /**
+   * @return Devuelve el identificador temporal de esta relacion (no se asegura que sea constante en el tiempo)
+   */
+  long getId();
 }
