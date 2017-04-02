@@ -11,4 +11,9 @@ public interface GraphNode extends PropertyContainer {
    * @return El conjunto de labels que posee este nodo
    */
   Nary<String> getLabels();
+
+  /**
+   * @return Devuelve un id que permite identificar a este nodo (no se puede asegurar que sea constante a traves del tiempo)
+   */
+  long getId();
 }

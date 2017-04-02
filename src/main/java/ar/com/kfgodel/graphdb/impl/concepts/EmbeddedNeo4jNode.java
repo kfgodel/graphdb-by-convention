@@ -31,6 +31,11 @@ public class EmbeddedNeo4jNode implements GraphNode, EmbeddedPropertyContainer {
   }
 
   @Override
+  public long getId() {
+    return neo4jNode.getId();
+  }
+
+  @Override
   public PropertyContainer getNeo4jContainer() {
     return getNeo4jNode();
   }
