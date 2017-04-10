@@ -1,5 +1,6 @@
 package ar.com.kfgodel.graphdb.impl.concepts;
 
+import ar.com.kfgodel.graphdb.api.concepts.GraphNode;
 import ar.com.kfgodel.graphdb.api.concepts.GraphRelationship;
 import org.neo4j.graphdb.PropertyContainer;
 import org.neo4j.graphdb.Relationship;
@@ -30,5 +31,20 @@ public class EmbeddedNeo4jRelationship implements GraphRelationship, EmbeddedPro
   @Override
   public long getId() {
     return neo4jRelationship.getId();
+  }
+
+  @Override
+  public GraphNode getOrigin() {
+    return EmbeddedNeo4jNode.create(neo4jRelationship.getStartNode());
+  }
+
+  @Override
+  public String getRelationshipType() {
+    return neo4jRelationship.getType().name();
+  }
+
+  @Override
+  public GraphNode getDestination() {
+    return EmbeddedNeo4jNode.create(neo4jRelationship.getEndNode());
   }
 }
