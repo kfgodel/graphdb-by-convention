@@ -14,7 +14,7 @@
   <artifactId>graphdb-by-convention</artifactId>
   <version>0.1-SNAPSHOT</version>
 
-  <name>Graph-Database</name>
+  <name>Graph-By-Convention</name>
   <description>Project to explore and simplify a graph database</description>
 
   <scm>
