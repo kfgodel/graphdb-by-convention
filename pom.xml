@@ -40,7 +40,7 @@
     <!-- Sonar properties to prevent unintentional id changes (Reference: https://docs.sonarqube.org/latest/analysis/analysis-parameters/) -->
     <sonar.projectKey>ar.com.kfgodel:graphdb-by-convention</sonar.projectKey>
 
-    <version.neo4j>3.1.2</version.neo4j>
+    <version.neo4j>3.5.0</version.neo4j>
   </properties>
 
   <dependencies>
